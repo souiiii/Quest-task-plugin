@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+    implementation("org.mongodb:mongodb-driver-reactivestreams:5.1.0")
 }
 
 java {
