@@ -6,6 +6,10 @@ import com.yourplugin.quests.database.PlayerDataRepository;
 import com.yourplugin.quests.model.PlayerQuestData;
 import com.yourplugin.quests.model.Quest;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,5 +66,39 @@ public class QuestManager {
         return this.playerDataCache.get(uuid);
     }
 
-    // TODO: incrementProgress logic — coming next
+    public void incrementProgress(UUID uuid, String questId, int amount) {
+        PlayerQuestData data = getPlayerData(uuid);
+        Quest quest = getQuest(questId);
+
+        if (data == null || quest == null || data.getCompletedQuests().contains(questId)) {
+            return;
+        }
+
+        int currentProgress = data.getQuestProgress().getOrDefault(questId, 0);
+        int newProgress = currentProgress + amount;
+
+        if (newProgress >= quest.getRequiredAmount()) {
+            data.getCompletedQuests().add(questId);
+            data.getQuestProgress().remove(questId);
+
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                Player player = Bukkit.getPlayer(uuid);
+                if (player != null && player.isOnline()) {
+                    if (quest.getRewardCommand() != null && !quest.getRewardCommand().isEmpty()) {
+                        String cmd = quest.getRewardCommand().replace("%player%", player.getName());
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+                    }
+                    if (quest.getRewardItems() != null) {
+                        for (ItemStack item : quest.getRewardItems()) {
+                            player.getInventory().addItem(item);
+                        }
+                    }
+                }
+            });
+        } else {
+            data.getQuestProgress().put(questId, newProgress);
+        }
+
+        this.repository.saveData(data);
+    }
 }
