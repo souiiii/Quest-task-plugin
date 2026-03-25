@@ -1,0 +1,18 @@
+title: "Quests - Page %page%"
+rows: 6
+navigation:
+  previous:
+    slot: 45
+    item:
+      material: "ARROW"
+      display-name: "&ePrevious Page"
+  close:
+    slot: 49
+    item:
+      material: "BARRIER"
+      display-name: "&cClose"
+  next:
+    slot: 53
+    item:
+      material: "ARROW"
+      display-name: "&eNext Page"

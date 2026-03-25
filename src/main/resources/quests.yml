@@ -1,0 +1,31 @@
+quests:
+  miner_1:
+    type: MINING
+    target: "stone"
+    amount: 100
+    reward:
+      command: "give %player% diamond 1"
+    gui-item:
+      material: "STONE_PICKAXE"
+      display-name: "&eMiner I"
+      lore:
+        - "&7Mine 100 Stone"
+        - ""
+        - "&fProgress: &a%progress%/%required%"
+        - "&fStatus: &e%status%"
+        - "&fBar: &a%percentage%"
+  slayer_1:
+    type: KILLING
+    target: "zombie"
+    amount: 50
+    reward:
+      command: "give %player% iron_ingot 10"
+    gui-item:
+      material: "IRON_SWORD"
+      display-name: "&cZombie Slayer I"
+      lore:
+        - "&7Slay 50 Zombies"
+        - ""
+        - "&fProgress: &a%progress%/%required%"
+        - "&fStatus: &e%status%"
+        - "&fBar: &a%percentage%"

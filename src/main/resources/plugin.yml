@@ -2,3 +2,12 @@ name: QuestsPlugin
 version: 1.0.0
 main: com.yourplugin.quests.QuestsPlugin
 api-version: '1.21'
+softdepend:
+  - PlaceholderAPI
+commands:
+  quests:
+  questadmin:
+    permission: quests.admin
+permissions:
+  quests.admin:
+    default: op

@@ -10,6 +10,7 @@ import com.yourplugin.quests.listener.KillingListener;
 import com.yourplugin.quests.listener.MiningListener;
 import com.yourplugin.quests.listener.MovementListener;
 import com.yourplugin.quests.manager.QuestManager;
+import com.yourplugin.quests.placeholder.QuestsExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -34,6 +35,12 @@ public class QuestsPlugin extends JavaPlugin implements Listener {
         instance = this;
 
         saveDefaultConfig();
+        if (!new java.io.File(getDataFolder(), "quests.yml").exists()) {
+            saveResource("quests.yml", false);
+        }
+        if (!new java.io.File(getDataFolder(), "gui.yml").exists()) {
+            saveResource("gui.yml", false);
+        }
 
         this.mongoManager = new MongoManager(this);
         this.mongoManager.connect();
@@ -52,6 +59,10 @@ public class QuestsPlugin extends JavaPlugin implements Listener {
 
         getCommand("quests").setExecutor(new QuestsCommand(this, this.questManager, guiConfig));
         getCommand("questadmin").setExecutor(new QuestAdminCommand(this, this.questManager, repository, guiConfig, questLoader));
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new QuestsExpansion(this.questManager).register();
+        }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             this.questManager.loadPlayerData(player.getUniqueId());
