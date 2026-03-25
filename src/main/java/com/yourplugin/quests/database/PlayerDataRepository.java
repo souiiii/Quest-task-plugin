@@ -97,6 +97,7 @@ public class PlayerDataRepository {
             progressDoc.put(entry.getKey(), entry.getValue());
         }
         document.put("questProgress", progressDoc);
+
         document.put("completedQuests", data.getCompletedQuests());
 
         return document;

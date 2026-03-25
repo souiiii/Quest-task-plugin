@@ -67,8 +67,6 @@ public class QuestsPlugin extends JavaPlugin implements Listener {
         for (Player player : Bukkit.getOnlinePlayers()) {
             this.questManager.loadPlayerData(player.getUniqueId());
         }
-
-        getLogger().info("QuestsPlugin enabled. Core mechanics and listeners registered.");
     }
 
     @Override
@@ -82,21 +80,15 @@ public class QuestsPlugin extends JavaPlugin implements Listener {
         if (this.mongoManager != null) {
             this.mongoManager.disconnect();
         }
-        
-        getLogger().info("QuestsPlugin disabled.");
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (this.questManager != null) {
-            this.questManager.loadPlayerData(event.getPlayer().getUniqueId());
-        }
+        this.questManager.loadPlayerData(event.getPlayer().getUniqueId());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        if (this.questManager != null) {
-            this.questManager.unloadPlayerData(event.getPlayer().getUniqueId());
-        }
+        this.questManager.unloadPlayerData(event.getPlayer().getUniqueId());
     }
 }

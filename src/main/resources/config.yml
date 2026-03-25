@@ -1,5 +1,8 @@
-# QuestsPlugin Configuration
-
 mongodb:
   uri: "mongodb://localhost:27017"
-  database: "questsplugin"
+  database: "quests_db"
+
+messages:
+  prefix: "&8[&eQuests&8] "
+  quest-complete: "&aYou have completed the quest &e%quest%&a!"
+  tracking: "&aNow tracking: &e%quest%"

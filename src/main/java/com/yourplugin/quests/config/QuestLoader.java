@@ -7,6 +7,7 @@ import com.yourplugin.quests.model.QuestType;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -5,7 +5,6 @@ import com.yourplugin.quests.config.QuestLoader;
 import com.yourplugin.quests.database.PlayerDataRepository;
 import com.yourplugin.quests.model.PlayerQuestData;
 import com.yourplugin.quests.model.Quest;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -35,7 +34,6 @@ public class QuestManager {
     public void loadQuests() {
         this.quests.clear();
         this.quests.putAll(this.loader.loadQuests());
-        plugin.getLogger().info("Loaded " + this.quests.size() + " quests.");
     }
 
     public void loadPlayerData(UUID uuid) {

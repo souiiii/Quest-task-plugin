@@ -1,31 +1,56 @@
 quests:
   miner_1:
     type: MINING
-    target: "stone"
-    amount: 100
+    target: "DIAMOND_ORE"
+    amount: 10
     reward:
-      command: "give %player% diamond 1"
+      command: "give %player% diamond 5"
     gui-item:
-      material: "STONE_PICKAXE"
-      display-name: "&eMiner I"
+      material: "DIAMOND_PICKAXE"
+      display-name: "&bDiamond Miner"
       lore:
-        - "&7Mine 100 Stone"
+        - "&7Mine 10 Diamond Ores"
         - ""
-        - "&fProgress: &a%progress%/%required%"
+        - "&fProgress: &e%progress%/%required%"
         - "&fStatus: &e%status%"
-        - "&fBar: &a%percentage%"
-  slayer_1:
+        - "&fCompletion: &b%percentage%"
+      item-flags:
+        - "HIDE_ATTRIBUTES"
+      custom-model-data: 1
+
+  hunter_1:
     type: KILLING
-    target: "zombie"
+    target: "ZOMBIE"
     amount: 50
     reward:
-      command: "give %player% iron_ingot 10"
+      command: "eco give %player% 1000"
     gui-item:
       material: "IRON_SWORD"
-      display-name: "&cZombie Slayer I"
+      display-name: "&cZombie Hunter"
       lore:
         - "&7Slay 50 Zombies"
         - ""
-        - "&fProgress: &a%progress%/%required%"
+        - "&fProgress: &e%progress%/%required%"
         - "&fStatus: &e%status%"
-        - "&fBar: &a%percentage%"
+        - "&fCompletion: &b%percentage%"
+      item-flags:
+        - "HIDE_ATTRIBUTES"
+
+  runner_1:
+    type: RUNNING
+    target: ""
+    amount: 1000
+    reward:
+      command: "give %player% speed_potion 1"
+    gui-item:
+      material: "LEATHER_BOOTS"
+      display-name: "&aMarathon"
+      lore:
+        - "&7Run 1000 blocks"
+        - ""
+        - "&fProgress: &e%progress%/%required%"
+        - "&fStatus: &e%status%"
+        - "&fCompletion: &b%percentage%"
+      item-flags:
+        - "HIDE_ATTRIBUTES"
+        - "HIDE_DYE"

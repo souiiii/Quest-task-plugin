@@ -1,5 +1,7 @@
-title: "Quests - Page %page%"
+title: "&8Quests - Page %page%"
 rows: 6
+quest-slot-start: 0
+quest-slot-end: 44
 navigation:
   previous:
     slot: 45
