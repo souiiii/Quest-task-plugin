@@ -1,5 +1,8 @@
 package com.yourplugin.quests;
 
+import com.yourplugin.quests.command.QuestAdminCommand;
+import com.yourplugin.quests.command.QuestsCommand;
+import com.yourplugin.quests.config.GuiConfig;
 import com.yourplugin.quests.config.QuestLoader;
 import com.yourplugin.quests.database.MongoManager;
 import com.yourplugin.quests.database.PlayerDataRepository;
@@ -37,6 +40,7 @@ public class QuestsPlugin extends JavaPlugin implements Listener {
 
         PlayerDataRepository repository = new PlayerDataRepository(this.mongoManager);
         QuestLoader questLoader = new QuestLoader(this);
+        GuiConfig guiConfig = new GuiConfig(this);
 
         this.questManager = new QuestManager(this, repository, questLoader);
         this.questManager.loadQuests();
@@ -45,6 +49,9 @@ public class QuestsPlugin extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new MiningListener(this.questManager), this);
         Bukkit.getPluginManager().registerEvents(new KillingListener(this.questManager), this);
         Bukkit.getPluginManager().registerEvents(new MovementListener(this, this.questManager), this);
+
+        getCommand("quests").setExecutor(new QuestsCommand(this, this.questManager, guiConfig));
+        getCommand("questadmin").setExecutor(new QuestAdminCommand(this, this.questManager, repository, guiConfig, questLoader));
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             this.questManager.loadPlayerData(player.getUniqueId());
