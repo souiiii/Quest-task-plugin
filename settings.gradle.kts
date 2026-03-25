@@ -1,1 +1,1 @@
-rootProject.name = "QuestsPlugin"
+rootProject.name = "QuestsPlugi"
